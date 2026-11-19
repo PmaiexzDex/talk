@@ -1,31 +1,18 @@
-local MSG = "LA V1.64 LOADING BY Pmaiexz.dex"
+local MSGS = {"LA V1.64 LOADING BY Pmaiexz.dex", "RESONANSE V2.9", "XOCU","ReverseFTAP", "Venom X Hub" ,"Mercury"}
+local DELAY = 1
 
 local TextChatService = game:GetService("TextChatService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local function tryTextChat()
-    local ok = pcall(function()
-        local channel = TextChatService:FindFirstChild("RBXGeneral", true)
-        if not channel then
-            local tc = TextChatService:FindFirstChild("TextChannels")
-            if tc then channel = tc:FindFirstChild("RBXGeneral") end
+local channel = TextChatService:FindFirstChild("RBXGeneral", true)
+    or TextChatService:FindFirstChild("TextChannels"):FindFirstChild("RBXGeneral")
+
+if channel then
+    task.spawn(function()
+        while task.wait(DELAY) do
+            for _, m in ipairs(MSGS) do
+                pcall(function() channel:SendAsync(m) end)
+                task.wait(DELAY)
+            end
         end
-        if not channel or not channel:IsA("TextChannel") then return end
-        channel:SendAsync(MSG)
     end)
-    return ok
-end
-
-local function tryLegacy()
-    local ok = pcall(function()
-        local ev = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
-        if not ev then return end
-        local say = ev:FindFirstChild("SayMessageRequest")
-        if say then say:FireServer(MSG, "All") end
-    end)
-    return ok
-end
-
-if not tryTextChat() then
-    tryLegacy()
 end
