@@ -1,5 +1,15 @@
 local MESSAGE = "LA V1.64 LOADING BY Pmaiexz.dex", "RESONANSE V2.9", "XOCU","ReverseFTAP", "Venom X Hub" ,"Mercury" , "Sleepy hub","Resitstance", "RESONANSE V2.10"
-local DELAY   = 1               
+local MESSAGES = {
+    "LA V1.64 LOADING BY Pmaiexz.dex",
+    "RESONANSE V2.9",
+    "XOCU",
+    "ReverseFTAP",
+    "Venom X Hub",
+    "Mercury",
+     "Sleepy hub",
+     "RESONANSE V2.10",
+}
+local DELAY = 1.5  
 
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -14,32 +24,22 @@ local function getChannel()
     return nil
 end
 
-local function sendWord(word)
+local function send(msg)
     local ch = getChannel()
     if ch then
-        pcall(function() ch:SendAsync(word) end)
+        pcall(function() ch:SendAsync(msg) end)
         return true
     end
-    -- fallback legacy
     local ok = pcall(function()
         local ev = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
         if not ev then return end
         local say = ev:FindFirstChild("SayMessageRequest")
-        if say then say:FireServer(word, "All") end
+        if say then say:FireServer(msg, "All") end
     end)
     return ok
 end
 
--- แยกคำด้วยช่องว่าง (รองรับภาษาไทย)
-local words = {}
-for w in string.gmatch(MESSAGE, "%S+") do
-    table.insert(words, w)
-end
-
--- ส่งทีละคำ
-for i, w in ipairs(words) do
-    sendWord(w)
-    if i < #words then
-        task.wait(DELAY)
-    end
+for i, msg in ipairs(MESSAGES) do
+    send(msg)
+    if i < #MESSAGES then task.wait(DELAY) end
 end
