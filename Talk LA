@@ -1,4 +1,4 @@
-local MSG = "LA v1.64 || By Pmaiexz.dex"
+local MSG = "LA v1.64 loading || By Pmaiexz.dex"
 
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
