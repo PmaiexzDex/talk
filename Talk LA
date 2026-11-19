@@ -1,4 +1,4 @@
-local MSGS = {"LA V1.64 LOADING BY Pmaiexz.dex", "RESONANSE V2.9", "XOCU","ReverseFTAP", "Venom X Hub" ,"Mercury"}
+local MSGS = {"LA V1.64 LOADING BY Pmaiexz.dex", "RESONANSE V2.9", "XOCU","ReverseFTAP", "Venom X Hub" ,"Mercury" , "Sleepy hub","Resitstance", "RESONANSE V2.10"}
 local DELAY = 1
 
 local TextChatService = game:GetService("TextChatService")
